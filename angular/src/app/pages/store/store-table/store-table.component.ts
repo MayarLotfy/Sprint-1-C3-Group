@@ -77,7 +77,11 @@ export class StoreTableComponent {
         });
       });
 
-      
+      this.source.onUpdated().subscribe((productData: ProductData)=>{
+        this._apiService.updateProduct(productData).subscribe((apiresponse:  APIData)=>{
+          console.log(apiresponse);
+        });
+      });
 
       this._apiService.getProducts().subscribe((apiresponse: APIData)=>{
         for (var i = 0 ; i < apiresponse.data.length ; i++ )
