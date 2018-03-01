@@ -17,8 +17,12 @@ import { APIData  , ProductData } from '../../../app_services/models/api.data.st
 })
 export class StoreTableComponent {
 
+  editor: {
+    config: false
+  }
   settings = {
     add: {
+      inputClass:"ID",
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
@@ -68,7 +72,17 @@ export class StoreTableComponent {
         this._apiService.createProduct(productData).subscribe((apiresponse: APIData)=>{
           console.log(apiresponse);
         });
+});
+        this.source.onRemoved().subscribe((productData :ProductData)=>{
+
+          this._apiService.deleteProduct(productData).subscribe((apiresponse: APIData)=>{
+            console.log(apiresponse);
+          });
       });
+
+      this.source.onChanged().subscribe((productData :ProductData)=>{
+    // console.log(productData);
+    });
 
       this._apiService.getProducts().subscribe((apiresponse: APIData)=>{
         for (var i = 0 ; i < apiresponse.data.length ; i++ )
@@ -79,13 +93,15 @@ export class StoreTableComponent {
       });
     }
 
+
     onDeleteConfirm(event): void {
-      if (window.confirm('Are you sure you want to delete?')) {
+      if(window.confirm('Are you sure you want to delete?')) {
         event.confirm.resolve();
       } else {
         event.confirm.reject();
       }
     }
+
 
 
 }
