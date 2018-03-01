@@ -77,6 +77,20 @@ export class StoreTableComponent {
         console.log(apiresponse.data[0]);
         this.source.load( apiresponse.data);
       });
+      this.source.onRemoved().subscribe((productData :ProductData)=>{
+        
+                this._apiService.deleteProduct(productData).subscribe((apiresponse: APIData)=>{
+                  console.log(apiresponse);
+                });
+              });
+
+              this.source.onUpdated().subscribe((productData :ProductData)=>{
+                
+                        this._apiService.updateProduct(productData).subscribe((apiresponse: APIData)=>{
+                          console.log(apiresponse);
+                        });
+                      });
+        
     }
 
     onDeleteConfirm(event): void {
