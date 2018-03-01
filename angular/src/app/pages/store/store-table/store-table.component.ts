@@ -70,6 +70,15 @@ export class StoreTableComponent {
         });
       });
 
+
+      this.source.onRemoved().subscribe((productData: ProductData)=> {
+        this._apiService.deleteProduct(productData).subscribe((apiresponse: APIData) =>{
+          console.log(apiresponse);
+        });
+      });
+
+      
+
       this._apiService.getProducts().subscribe((apiresponse: APIData)=>{
         for (var i = 0 ; i < apiresponse.data.length ; i++ )
           apiresponse.data[i].id = (i+1);
