@@ -38,4 +38,9 @@ createProduct(productdata: ProductData): Observable<APIData>{
    return this.http.delete<ProductData>( this.apiUrl + '/product/deleteProduct/' + productdata._id)
    .catch(this.errorHandler);
  }
+
+ updateProduct(productdata:ProductData):Observable<APIData>
+ {
+   return this.http.patch<ProductData>(this.apiUrl + '/product/updateProduct/' + productdata._id).catch(this.errorHandler);
+ }
 }

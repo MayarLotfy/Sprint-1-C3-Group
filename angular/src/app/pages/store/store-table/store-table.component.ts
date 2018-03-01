@@ -78,6 +78,12 @@ export class StoreTableComponent {
           this._apiService.deleteProduct(productData).subscribe((apiresponse: APIData)=>{
             console.log(apiresponse);
           });
+        });
+
+          this.source.onUpdated().subscribe((productData:ProductData)=>{
+            this._apiService.updateProduct(productData).subscribe((apiresponse:APIData)=>{
+              console.log(apiresponse);
+            });
       });
 
       this.source.onChanged().subscribe((productData :ProductData)=>{
@@ -102,6 +108,5 @@ export class StoreTableComponent {
       }
     }
 
-
-
+}
 }
