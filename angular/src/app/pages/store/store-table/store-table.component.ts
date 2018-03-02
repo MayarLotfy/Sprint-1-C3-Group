@@ -56,6 +56,8 @@ export class StoreTableComponent {
       seller: {
         title: 'Seller',
         type: 'String',
+        editable: false,
+        addable: false,
       },
     },
   };
@@ -64,7 +66,7 @@ export class StoreTableComponent {
 
     constructor(private _apiService: APIService) {
       this.source.onAdded().subscribe((productData :ProductData)=>{
-
+productData.seller = localStorage.getItem('currentUser');
         this._apiService.createProduct(productData).subscribe((apiresponse: APIData)=>{
           console.log(apiresponse);
         });
